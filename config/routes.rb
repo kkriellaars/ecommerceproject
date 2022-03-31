@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   get "/products/index/" => "products#index"
   get "/products/new/" => "products#new"
   get "/products/sale/" => "products#sale"
+  get "/products/updated/" => "products#updated"
+  get "/categories/index/" => "categories#index"
+  get "/categories/:id" => "categories#show"
 end

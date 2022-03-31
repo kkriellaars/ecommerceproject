@@ -1,1 +1,9 @@
-a
+<h1>Whats on sale</h1>
+<div class="columns">
+<% @productsale.each do |product|%>
+  <%= render partial: 'product',
+             object: product,
+             locals: {show_link: false } %>
+<% end %>
+<%= paginate @productsale%>
+</div>

@@ -1,13 +1,21 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = Product.all.page(params[:page]).per(5)
   end
 
   def sale
-    @products = Product.all
+    @productsale = Product.where(on_sale: "Y").page(params[:page]).per(5)
   end
 
   def new
-    @products = Product.all
+    @productsnew = Product.where("created_at >= ?", 3.days.ago).page(params[:page]).per(5)
   end
+
+  def updated
+    @productsupdated = Product.where("updated_at >= ?", 3.days.ago).page(params[:page]).per(5)
+  end
+end
+
+def product_params
+  params.require(:product).permit(:name, :id, :search)
 end

@@ -1,0 +1,9 @@
+<h1>Showing all <%=Category.find(@producttype.first.category_id).name%> products</h1>
+<div class="columns">
+<% @producttype.each do |product|%>
+  <%= render partial: 'product',
+             object: product,
+             locals: {show_link: false } %>
+<% end %>
+<%= paginate @producttype%>
+</div>

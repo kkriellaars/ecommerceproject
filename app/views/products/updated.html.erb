@@ -1,9 +1,9 @@
-<h1>Our available products</h1>
+<h1>Recently Updated</h1>
 <div class="columns">
-<% @products.each do |product|%>
+<% @productsupdated.each do |product|%>
   <%= render partial: 'product',
              object: product,
              locals: {show_link: false } %>
 <% end %>
-<%= paginate @products%>
+<%= paginate @productsupdated%>
 </div>

@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,13 +13,20 @@
 
   <body>
   <h1>Clocks'R'Us Furniture Superstore</h1>
-  <ul>
-  <li><a href="/pages/home">Home</a></li>
-  <li><a href="/pages/about">About Us</a></li>
-  <li><a href="/products/index/">All Products</a></li>
-  <li><a href="/products/new/">What's new</a></li>
-  <li><a href="/products/sale/">On Sale</a></li>
-  </ul>
+  <nav class="navbar">
+  <a  class="navbar-item" href="/pages/home">Home</a>
+  <a class="navbar-item" href="/pages/about">About Us</a>
+   <div class="navbar-item has-dropdown is-hoverable">
+    <a class="navbar-link">Products</a>
+    <div class="navbar-dropdown">
+      <a href="/products/index/">All Products</a>
+      <a href="/products/new/">What's new</a>
+      <a href="/products/sale/">On Sale</a>
+      <a href="/products/updated/">Recently Updated</a>
+    </div>
+   </div>
+  <a class="navbar-item" href="/categories/index/">Categories</a>
+  </nav>
     <%= yield %>
   </body>
 </html>
