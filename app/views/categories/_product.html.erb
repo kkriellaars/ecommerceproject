@@ -3,19 +3,30 @@
      <% if product.image.present?%>
             <div class="card-image">
               <figure class="image is-2by3">
-                <%= image_tag product.image, :size => '250x300' %>
+                <%= image_tag product.image%>
               </figure>
             </div>
           <% end %>
         <div class="card-content">
           <div class="content">
             <h2 class="title"> <%=product.name %></h2>
+            <% if params[:controller] == 'products' && params[:action] == 'show' %>
             <p class="card-footer-item">
             <%= product.description %>
-          </p>
+            </p>
+            <% end %>
           </div>
         </div>
         <footer class="card-footer">
+        <% if params[:controller] == 'products' && params[:action] == 'show' %>
+          <p class="card-footer-item">
+           Add this product to Cart
+          </p>
+        <% else %>
+          <p class="card-footer-item">
+           <a href="/products/<%= product.id %>">Check this Product</a>
+          </p>
+        <% end %>
           <p class="card-footer-item">
             Only <%= product.quantity%> remaining.
           </p>

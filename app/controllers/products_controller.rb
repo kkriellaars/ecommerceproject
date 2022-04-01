@@ -14,6 +14,10 @@ class ProductsController < ApplicationController
   def updated
     @productsupdated = Product.where("updated_at >= ?", 3.days.ago).page(params[:page]).per(5)
   end
+
+  def show
+    @singleproduct = Product.find(params[:id])
+  end
 end
 
 def product_params

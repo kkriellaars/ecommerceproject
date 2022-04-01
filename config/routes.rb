@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "/products/new/" => "products#new"
   get "/products/sale/" => "products#sale"
   get "/products/updated/" => "products#updated"
+  get "/products/:id", to: "products#show"
   get "/categories/index/" => "categories#index"
   get "/categories/:id" => "categories#show"
 end
