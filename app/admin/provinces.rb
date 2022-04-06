@@ -1,16 +1,18 @@
-ActiveAdmin.register Customer do
+ActiveAdmin.register Province do
+
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :first_name, :last_name, :tel_number, :card_number, :address
+  # permit_params :name, :gst, :pst
   #
   # or
   #
   # permit_params do
-  #   permitted = [:first_name, :last_name, :tel_number, :card_number, :address]
+  #   permitted = [:name, :gst, :pst]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  
 end
