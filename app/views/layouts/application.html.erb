@@ -26,7 +26,24 @@
     </div>
    </div>
   <a class="navbar-item" href="/categories/index/">Categories</a>
+  <% if customer_signed_in? %>
+    <p class="navbar-item">Logged in as '<strong><%= current_customer.email%>'</strong></p>
+    <%= link_to "Edit profile", edit_customer_registration_path, :class => 'navbar-item' %>
+    <%= button_to "Logout", destroy_customer_session_path, method: :delete, :class => 'navbar-item' %>
+
+  <% else %>
+    <div class="navbar-item">
+    <%= link_to "Sign Up", new_customer_registration_path, :class => 'navbar-item' %>
+    <%= link_to "Login", new_customer_session_path, :class => 'navbar-item' %>
+    </div>
+  <% end %>
   </nav>
+  <% if notice %>
+     <p class="alert alert-success"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+     <p class="alert alert-danger"><%= alert %></p>
+  <% end %>
     <%= yield %>
   </body>
 </html>

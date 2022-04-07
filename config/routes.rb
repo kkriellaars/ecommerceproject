@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :customers
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   get "products/index"
@@ -6,8 +7,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
   root to: "pages#home"
-  get "/pages/home" => "pages#home"
+  get "/pages/home" => "products#index"
   get "/pages/about" => "pages#about"
   get "/products/index/" => "products#index"
   get "/products/new/" => "products#new"
