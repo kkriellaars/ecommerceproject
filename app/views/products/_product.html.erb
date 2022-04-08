@@ -37,6 +37,9 @@
           <% else %>
           <p class="card-footer-item">On sale for $<%= product.sale_price %>!</p>
           <% end %>
+          <%= form_with url: cart_index_path, method: :post do %>
+          <p class="card-footer-item"> <%= button_tag "Add to cart"%></p>
+          <% end %>
         </footer>
     </div>
 </div>

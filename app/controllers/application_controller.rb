@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def initialize_session
+    session[:shopping_cart] ||= 0
+  end
+
   def cart
     Product.find(session[:shopping_cart])
   end
