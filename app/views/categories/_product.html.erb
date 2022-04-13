@@ -9,7 +9,14 @@
           <% end %>
         <div class="card-content">
           <div class="content">
-            <h2 class="title"> <%=product.name %></h2>
+            <h2 class="title"><a href="/products/<%= product.id %>"><%= product.name %></a></h2>
+          <% unless product.sale_price != nil %>
+          <p class="subtitle">
+            $<%= product.unit_price%>
+          </p>
+          <% else %>
+          <p class="subtitle">On sale for $<%= product.sale_price %>!</p>
+          <% end %>
             <% if params[:controller] == 'products' && params[:action] == 'show' %>
             <p class="card-footer-item">
             <%= product.description %>
@@ -18,29 +25,22 @@
           </div>
         </div>
         <footer class="card-footer">
-          <p class="card-footer-item">
-           <a href="/products/<%= product.id %>">Check this Product</a>
-          </p>
-          <p class="card-footer-item">
-            Only <%= product.quantity%> remaining.
-          </p>
-          <% unless product.sale_price != nil %>
-          <p class="card-footer-item">
-            $<%= product.unit_price%>
-          </p>
-          <% else %>
-          <p class="card-footer-item">On sale for $<%= product.sale_price %>!</p>
-          <% end %>
-          <% if cart.include?(product)%>
-          <p class="card-footer-item">
-            <%= button_to cart_path(product), method: :delete do %>
-              Remove from Cart
-            </p>
-            <% end %>
-          <% else %>
           <%= form_with url: cart_index_path, method: :post do %>
           <%= hidden_field_tag(:id, product.id) %>
-          <p class="card-footer-item"> <%= button_tag "Add to cart"%></p>
+          <p class="card-footer-item"> <%= button_tag "Add to cart"%>
+          </p>
+          <% end %>
+          <% if cart.include?(product)%>
+          <% index = session[:shopping_cart].find_index(product.id.to_i) %>
+          <% if session[:cart_quantity][index] > 1 %>
+          <%= button_to cart_path(product), method: :put do %>
+            Remove one from Cart
+            <% end %>
+          <% end %>
+          <p class="card-footer-item">
+          <%= button_to cart_path(product), method: :delete do %>
+          Remove from Cart
+          </p>
           <% end %>
           <% end %>
         </footer>

@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
 
   def initialize_session
     session[:shopping_cart] ||= []
+    session[:cart_quantity] ||= []
   end
 
   def cart

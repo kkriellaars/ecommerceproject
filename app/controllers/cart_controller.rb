@@ -2,19 +2,38 @@ class CartController < ApplicationController
   def create
     logger.debug("adding #{params[:id]} to cart")
     id = params[:id].to_i
-    unless session[:shopping_cart].include?(id)
+    product = Product.find(id)
+    if session[:shopping_cart].include?(id)
+      index = session[:shopping_cart].find_index(id.to_i)
+      session[:cart_quantity][index] += 1
+      flash[:notice] =
+        "A total of #{session[:cart_quantity][index]} #{product.name} are in your cart."
+    else
       session[:shopping_cart] << id
-      product = Product.find(id)
+      session[:cart_quantity] << 1
       flash[:notice] = "#{product.name} added to cart."
     end
-    redirect_to root_path
+    redirect_back fallback_location: root_path
   end
 
   def destroy
     id = params[:id].to_i
-    session[:shopping_cart].delete(id)
     product = Product.find(id)
-    flash[:notice] = "#{product.name} removed from cart."
-    redirect_to root_path
+    session[:shopping_cart].delete(id)
+    index = session[:shopping_cart].find_index(id.to_i)
+    flash[:notice] =
+      "#{product.name} removed from cart."
+    redirect_back fallback_location: root_path
+  end
+
+  def update
+    id = params[:id].to_i
+    product = Product.find(id)
+    index = session[:shopping_cart].find_index(id.to_i)
+    session[:cart_quantity][index] != 1
+    session[:cart_quantity][index] -= 1
+    flash[:notice] =
+      "#{session[:cart_quantity][index]} #{product.name} are remaining in your cart."
+    redirect_back fallback_location: root_path
   end
 end
