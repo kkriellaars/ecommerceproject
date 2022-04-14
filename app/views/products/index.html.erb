@@ -1,4 +1,10 @@
 <h1>Our available products</h1>
+<%= form_tag products_index_path, :method => "get" do%>
+  <%= label_tag(:search, "Search by product name or description, or by category: ")%>
+  <%= text_field_tag :search, params[:search]%>
+  <%= select_tag(:search_category, options_for_select(Category.pluck(:name, :id)), {:include_blank => true})%>
+  <%= submit_tag("Search", :name => nil)%>
+<%end%>
 <div class="columns">
 <% @products.each do |product|%>
   <%= render partial: 'product',

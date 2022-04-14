@@ -4,4 +4,5 @@ class Order < ApplicationRecord
   has_many :product
   validates :total_due, presence: true
   validates :order_date, presence: true
+  validates :total_due, numericality: true
 end

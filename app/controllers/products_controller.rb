@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all.page(params[:page]).per(5)
+    @products = Product.search(params[:search], params[:search_category]).page(params[:page]).per(5)
+    @categories = Category.all
   end
 
   def sale
@@ -21,5 +22,5 @@ class ProductsController < ApplicationController
 end
 
 def product_params
-  params.require(:product).permit(:name, :id, :search)
+  params.require(:product).permit(:name, :id, :description, :search, :category_id)
 end
