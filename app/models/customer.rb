@@ -1,6 +1,6 @@
 class Customer < ApplicationRecord
   belongs_to :province
-  has_many :orders
+  has_many :orders, dependent: :destroy
 
   validates :email, presence: true
   validates :card_number, numericality: { only_integer: true }

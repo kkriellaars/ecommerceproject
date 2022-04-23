@@ -21,9 +21,12 @@ class Product < ApplicationRecord
                                 search: "%#{search}%")
                 elsif search != "" && search_category != ""
                   @category_products = Product.where("category_id = :search_category",
-                                                     search: "%#{search}%", search_category: search_category.to_s)
-                  @products = @category_products.where("name LIKE :search OR description LIKE :search",
-                                                       search: "%#{search}%")
+                                                     search:          "%#{search}%",
+                                                     search_category: search_category.to_s)
+                  @products = @category_products.where(
+                    "name LIKE :search OR description LIKE :search",
+                    search: "%#{search}%"
+                  )
                 elsif search == "" && search_category
                   Product.where("category_id = :search_category",
                                 search_category: search_category.to_s)

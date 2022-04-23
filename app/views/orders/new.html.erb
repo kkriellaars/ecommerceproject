@@ -1,0 +1,14 @@
+<table>
+<tr>
+<th>Product Name</th>
+<th>Product Price</th>
+<th>Product Quantity</th>
+</tr>
+<% session[:shopping_cart].each do |cartItem|%>
+<tr>
+<td><%= Product.find(cartItem).name %></td>
+<td><%= Product.find(cartItem).sale_price %></td>
+<td><%= session[:cart_quantity][cartItem]%></td>
+</tr>
+<% end %>
+</table>

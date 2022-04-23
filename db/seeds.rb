@@ -16,7 +16,6 @@ if dont_do == false
   until categories == 10
     new_category = Category.new
     new_category.name = Faker::Commerce.department(max: 1)
-    puts new_category.name
     categories += 1
     new_category.save!
     times_done = 0
