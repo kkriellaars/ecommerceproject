@@ -19,9 +19,10 @@ class CartController < ApplicationController
   def destroy
     id = params[:id].to_i
     product = Product.find(id)
-    session[:shopping_cart].delete(id)
     index = session[:shopping_cart].find_index(id.to_i)
     session[:cart_quantity][index] = 0
+    session[:cart_quantity].delete(index)
+    session[:shopping_cart].delete(id)
     flash[:notice] =
       "#{product.name} removed from cart."
     redirect_back fallback_location: root_path

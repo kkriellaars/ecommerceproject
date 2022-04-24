@@ -1,3 +1,5 @@
+
+<% total = 0 %>
 <table>
 <tr>
 <th>Product Name</th>
@@ -5,10 +7,27 @@
 <th>Product Quantity</th>
 </tr>
 <% session[:shopping_cart].each do |cartItem|%>
+<% index = session[:shopping_cart].find_index(Product.find(cartItem).id.to_i)%>
 <tr>
 <td><%= Product.find(cartItem).name %></td>
+<% if Product.find(cartItem).sale_price != nil %>
 <td><%= Product.find(cartItem).sale_price %></td>
-<td><%= session[:cart_quantity][cartItem]%></td>
+<% total += (Product.find(cartItem).sale_price * session[:cart_quantity][index]) %>
+<% else %>
+<td><%= Product.find(cartItem).unit_price %></td>
+<% total += (Product.find(cartItem).unit_price * session[:cart_quantity][index]) %>
+<% end%>
+<td><%= session[:cart_quantity][index]%></td>
 </tr>
 <% end %>
 </table>
+<p>Subtotal = <%= total %></p>
+<% tax = 0 %>
+<p>GST: <%=current_customer.province.gst%>%</p>
+<% tax += current_customer.province.gst %>
+<p>PST: <%=current_customer.province.pst%>%</p>
+<% tax += current_customer.province.pst %>
+<p>HST: <%=current_customer.province.hst%>%</p>
+<% tax += current_customer.province.hst %>
+<% total += total * tax / 100%>
+<p>Total = <%= total.round(2) %></p>
