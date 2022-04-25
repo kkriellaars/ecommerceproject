@@ -31,3 +31,11 @@
 <% tax += current_customer.province.hst %>
 <% total += total * tax / 100%>
 <p>Total = <%= total.round(2) %></p>
+<%= form_for :post, url: orders_path, html: {data: {turbo: false }} do |f|%>
+<%= f.hidden_field :total_due, value: total %>
+<%= f.hidden_field :order_date, value: DateTime.now %>
+<%= f.hidden_field :customer_id, value: current_customer.id %>
+<p>
+<%= f.submit("Place Order")%>
+</p>
+<%end%>

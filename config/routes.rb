@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   get "/pages/search" => "pages#search"
 
   resources :cart, only: %i[create destroy update]
+  resources :orders
 end
