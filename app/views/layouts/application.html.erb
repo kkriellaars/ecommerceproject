@@ -30,15 +30,13 @@
     <p class="navbar-item">Logged in as '<strong><%= current_customer.email%>'</strong></p>
     <%= link_to "Edit profile", edit_customer_registration_path, :class => 'navbar-item' %>
     <%= button_to "Logout", destroy_customer_session_path, method: :delete, :class => 'navbar-item' %>
-
+    <a  class="navbar-item" href="/orders/new">Checkout</a>
   <% else %>
     <div class="navbar-item">
     <%= link_to "Sign Up", new_customer_registration_path, :class => 'navbar-item' %>
     <%= link_to "Login", new_customer_session_path, :class => 'navbar-item' %>
     </div>
   <% end %>
-
-    <a  class="navbar-item" href="/orders/new">Checkout</a>
   </nav>
   <% if notice %>
      <p class="alert alert-success"><%= notice %></p>
