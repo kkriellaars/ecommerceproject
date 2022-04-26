@@ -3,6 +3,14 @@ class OrdersController < ApplicationController
 
   def new; end
 
+  def list
+    @orders = Order.find(current_customer.id)
+  end
+
+  def show
+    @order_details = OrderDetail.find(params[:id])
+  end
+
   def create
     @order = Order.new(params[:post].permit(:total_due, :order_date, :customer_id))
     @order.save!
