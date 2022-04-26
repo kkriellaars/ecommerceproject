@@ -1,0 +1,11 @@
+<h2>My Orders</h2>
+<ul>
+<% @orders.each do |order| %>
+<li>
+<a href="/orders/<%= order.id %>">
+<%= order.order_date%>
+</a>
+</li>
+<% end %>
+
+</ul>

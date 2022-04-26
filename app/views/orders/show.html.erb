@@ -1,0 +1,18 @@
+<h2>Viewing details for <%= Order.find(@order_details.first.order_id).order_date %></h2>
+<p>Total amount of order: <%= Order.find(@order_details.first.order_id).total_due %></p>
+<table>
+<tr>
+  <th>Product Name</th>
+  <th>Price per item</th>
+  <th>Quantity of items</th>
+  <th>Total amount due of item</th>
+</tr>
+<% @order_details.each do |orderdetails| %>
+<tr>
+<th><%=Product.find(orderdetails.product_id).name %></th>
+<th><%=orderdetails.price_per_item %></th>
+<th><%=orderdetails.purchase_quantity %></th>
+<th><%=orderdetails.amount_due %></th>
+</tr>
+<% end %>
+</table>
