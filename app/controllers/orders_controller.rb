@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
               else
                 (session[:cart_quantity][index] * Product.find(cartitem).sale_price)
               end
-      details.amount_due = total
+      details.amount_due = total.round(2)
       details.save!
     end
     flash[:notice] = "Order placed successfully."

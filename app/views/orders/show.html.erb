@@ -1,6 +1,7 @@
 <% if !@order_details.first.nil? %>
+<% tax = 0%>
+<% total = 0 %>
 <h2>Viewing details for <%= Order.find(@order_details.first.order_id).order_date %></h2>
-<p>Total amount of order: <%= Order.find(@order_details.first.order_id).total_due %></p>
 <table>
 <tr>
   <th>Product Name</th>
@@ -14,9 +15,17 @@
 <th><%=orderdetails.price_per_item %></th>
 <th><%=orderdetails.purchase_quantity %></th>
 <th><%=orderdetails.amount_due %></th>
+<% total += orderdetails.price_per_item * orderdetails.purchase_quantity%>
 </tr>
 <% end %>
 </table>
+<% tax += current_customer.province.gst %>
+<% tax += current_customer.province.pst %>
+<% tax += current_customer.province.hst %>
+<p>Subtotal: <%= total %></p>
+<p>Tax amount paid: <%= tax %>%</p>
+<p>Total amount of order: <%= Order.find(@order_details.first.order_id).total_due.round(2) %></p>
+
 <% else %>
 <h2>Oops! It seems like this order has no items.</h2>
 <% end %>
