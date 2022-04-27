@@ -1,14 +1,12 @@
 class OrdersController < ApplicationController
-  def index; end
+  def index
+    @orders = Order.where(customer_id: current_customer.id)
+  end
 
   def new; end
 
-  def list
-    @orders = Order.find(current_customer.id)
-  end
-
   def show
-    @order_details = OrderDetail.find(params[:id])
+    @order_details = OrderDetail.where(order_id: params[:id])
   end
 
   def create
@@ -33,9 +31,9 @@ class OrdersController < ApplicationController
               end
       details.amount_due = total
       details.save!
-      flash[:notice] = "Order placed successfully."
-      redirect_back fallback_location: root_path and return
     end
+    flash[:notice] = "Order placed successfully."
+    redirect_back fallback_location: root_path and return
   end
 
   def order_details_params

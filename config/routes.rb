@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   get "/categories/:id" => "categories#show"
   get "/orders/new" => "orders#new"
   get "/orders/create" => "orders#create"
+  get "/orders/index" => "orders#index"
   get "/orders/:id", to: "orders#show"
-  get "/orders/list" => "orders#list"
   get "/pages/search" => "pages#search"
 
   resources :cart, only: %i[create destroy update]

@@ -1,3 +1,4 @@
+<% if !@order_details.first.nil? %>
 <h2>Viewing details for <%= Order.find(@order_details.first.order_id).order_date %></h2>
 <p>Total amount of order: <%= Order.find(@order_details.first.order_id).total_due %></p>
 <table>
@@ -16,3 +17,6 @@
 </tr>
 <% end %>
 </table>
+<% else %>
+<h2>Oops! It seems like this order has no items.</h2>
+<% end %>
