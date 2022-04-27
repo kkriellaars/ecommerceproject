@@ -5,6 +5,14 @@ class OrdersController < ApplicationController
 
   def new; end
 
+  def edit
+    @order = Order.find(params[:id])
+    @order.status = "Awaiting payment confirmation"
+    @order.save!
+    flash[:notice] = "Payment information sent"
+    redirect_back fallback_location: root_path and return
+  end
+
   def show
     @order_details = OrderDetail.where(order_id: params[:id])
   end
