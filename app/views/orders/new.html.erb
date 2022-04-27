@@ -1,3 +1,6 @@
+<% if session[:shopping_cart].length == 0%>
+<h2>Your shopping cart is currently empty.</h2>
+<% else %>
 <% total = 0 %>
 <table>
 <tr>
@@ -37,4 +40,5 @@
 <p>
 <%= f.submit("Place Order")%>
 </p>
-<%end%>
+<% end %>
+<% end %>

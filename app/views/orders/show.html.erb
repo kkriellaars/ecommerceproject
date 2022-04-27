@@ -25,7 +25,7 @@
 <p>Subtotal: <%= total %></p>
 <p>Tax amount paid: <%= tax %>%</p>
 <p>Total amount of order: <%= Order.find(@order_details.first.order_id).total_due.round(2) %></p>
-<% if Order.find(@order_details.first.order_id).status == "Awaiting payment confirmation" %>
+<% if Order.find(@order_details.first.order_id).status != "unpaid" %>
 <p>You've already sent a payment for this order.</p>
 <% else %>
 <%= link_to "Send Payment", edit_order_path(), method: :patch %>
