@@ -19,11 +19,8 @@
 </tr>
 <% end %>
 </table>
-<% tax += current_customer.province.gst %>
-<% tax += current_customer.province.pst %>
-<% tax += current_customer.province.hst %>
 <p>Subtotal: <%= total %></p>
-<p>Tax amount paid: <%= tax %>%</p>
+<p>Tax amount paid: <%= @order_details.first.tax_amount %>%</p>
 <p>Total amount of order: <%= Order.find(@order_details.first.order_id).total_due.round(2) %></p>
 <% if Order.find(@order_details.first.order_id).status != "unpaid" %>
 <p>You've already sent a payment for this order.</p>

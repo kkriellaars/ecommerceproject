@@ -38,6 +38,12 @@ class OrdersController < ApplicationController
                 (session[:cart_quantity][index] * Product.find(cartitem).sale_price)
               end
       details.amount_due = total.round(2)
+      tax = 0
+      tax += current_customer.province.gst
+      tax += current_customer.province.pst
+      tax += current_customer.province.hst
+      details.tax_paid = total * tax / 100
+      details.tax_amount = tax
       details.save!
     end
     flash[:notice] = "Order placed successfully."
