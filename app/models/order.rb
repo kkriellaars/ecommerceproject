@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :customer
   has_many :product, through: :order_details
-  has_many :order_details
+  has_many :order_details, dependent: :nullify
   validates :total_due, presence: true
   validates :order_date, presence: true
   validates :total_due, numericality: true

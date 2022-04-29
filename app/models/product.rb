@@ -5,7 +5,7 @@ class Product < ApplicationRecord
 
   belongs_to :category
   has_many :order, through: :order_details
-  has_many :order
+  has_many :order, dependent: :nullify
   has_one_attached :image, dependent: :destroy
   validates :name, presence: true
   validates :unit_price, presence: true
@@ -24,8 +24,7 @@ class Product < ApplicationRecord
                                                      search:          "%#{search}%",
                                                      search_category: search_category.to_s)
                   @products = @category_products.where(
-                    "name LIKE :search OR description LIKE :search",
-                    search: "%#{search}%"
+                    "name LIKE :search OR description LIKE :search", search: "%#{search}%"
                   )
                 elsif search == "" && search_category
                   Product.where("category_id = :search_category",
